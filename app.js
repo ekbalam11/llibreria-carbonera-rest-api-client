@@ -6,8 +6,14 @@ document.querySelectorAll('.emotion').forEach(img => {
         try {
 
             // TODO: COMPLETAR: Necesitamos hacer un fetch al endpoint correcto, procesar los datos y asignar el libro recuperado a la variable 'book'
+            const response = await fetch(`http://localhost:3000/api/books/recommendations/${emotion}/random`)
+            const data = await response.json();
+                console.log("data: ", data)
+                console.log("response: ", response)
 
-            const book = {}; // TODO: Aquí deberíamos tener un objeto con información del libro de la REST API
+            
+            const book = data.results[0]; // TODO: Aquí deberíamos tener un objeto con información del libro de la REST API
+            console.log("🚀 ~ img.addEventListener ~ data.results[0]:", data.results[0].emotions, data.results[0].title )
 
             // NO MODIFICAR A PARTIR DE AQUÍ
             document.querySelector('#book-title').textContent = book.title;
@@ -22,5 +28,6 @@ document.querySelectorAll('.emotion').forEach(img => {
             console.error('Error fetching book:', error.message);
             alert('An error ocurred. Use the developers tools!');
         }
+
     });
 });

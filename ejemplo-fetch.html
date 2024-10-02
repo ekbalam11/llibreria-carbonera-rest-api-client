@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chistes de Chuck Norris</title>
+</head>
+
+<body>
+    <h1>Chistes de Chuck Norris</h1>
+    <div id="joke"></div>
+    <button onclick="getJoke()">Obtener chiste</button>
+    <script>
+        async function getJoke() {
+
+            // 1. Invocar el método fetch con la URL adecuada (endpoint)
+            // Petición de tipo GET al endpoint
+            const response = await fetch("http://localhost:3000/api/books", { mode: 'no-cors'})
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+
+            // 2. Procesar la respuesta para extraer los resultados
+            // const data = await response.json();
+            // console.log(data.value)
+
+            // 3. Modificar el contenedor adecuado y la propiedad adecuada para mostrar el valor del chiste (#joke.textContent)
+            document.querySelector('#joke').textContent = data.value;
+        }
+
+    </script>
+</body>
+
+</html>
